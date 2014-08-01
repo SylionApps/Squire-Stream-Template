@@ -4,7 +4,7 @@ var express = require("express"),
     request = require("request"),
     argv	= require('minimist')(process.argv.slice(2)),
 
-// PELICULAS
+// MOVIES
 if (argv.m) {	
 	/*
 	
