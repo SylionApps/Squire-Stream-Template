@@ -1,6 +1,9 @@
 # Squire-Stream-Template
 
-<img src="https://cloud.githubusercontent.com/assets/219689/3491822/96bf5de6-059d-11e4-9826-a6f82025d1af.gif" width="300" height="70" alt="Squire Stream Icon"/>
+<img src="https://s3.amazonaws.com/Squire_Contents/sites+resources/github+streamers/stream_icon.png" width="108" height="108" alt="Squire Stream Icon"/>
+
+[Squire Site](http://www.squireapp.com)
+[Squire Stream Site](http://squireapp.com/streams/)
 
 ## Overview
 Streams is a Squire feature that lets the user watch content available outside of their hard drive. This means a stream is an ordered collection of items that can be watched in Squire. Each stream is encapsulated in an ```stm``` file. ```stm``` files are added to the Squire Helper which then extracts, orders and organizes the contents for the stream so they can be enjoyed from any available Squire client. The format for these files is open and this document explains how to properly create them.
