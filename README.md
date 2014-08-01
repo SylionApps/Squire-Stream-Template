@@ -21,6 +21,9 @@ This document takes care of the rules both files have to follow for your stm str
 This file contains all the information that belongs to the stream. It’s composed of a JSON that must  include the following mandatory keys:
 
 - **name**: string with the name of the streamer.
+- **author**: string with the name of the author
+- **icon**: name of the icon image inside the STM file
+- **homepage**: website of the streamer
 - **version**: current version of the streamer.
 - **description**: short description of the streamer.
 - **dependencies**: necessary modules that the ```npm``` needs to install for the stream to work.
@@ -35,6 +38,9 @@ Here’s an example of a ```package.json``` file:
 ```
 {
   "name" : "squire-streamer-name",
+  "author": "me",
+  "icon": "icon.png",
+  "homepage": "http://www.mysquirestream.com/",
   "version" : "0.0.1",
   "description"  : "Squire Streamer for X service",
   "updates": "http://www.mysquirestream.com/lastversion.zip",
