@@ -1,8 +1,8 @@
 {
   "name" : "squire-streamer-name",
-  "author": "me"
-  "icon": ""
-  "homepage": ""
+  "author": "me",
+  "icon": "",
+  "homepage": "",
   "version" : "0.0.1",
   "description"  : "Squire Streamer for X service",
   "homepage": "https://github.com/user/repo-name",
