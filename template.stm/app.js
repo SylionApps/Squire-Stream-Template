@@ -9,7 +9,7 @@ if (argv.m) {
 	/*
 	
 	id : movie IMDB code (required)
-	link : url or magnet to get movie. Support: youtube, magnet link, torrent (required)
+	link : url or magnet to get movie. Support: youtube, magnet link, torrent, direct URL to video (required)
 	
 	quality : link quality: 1080p, 720p o 480p (optional)
 	seeders : number of seeders if link is a magnet or torrent file (optional)
