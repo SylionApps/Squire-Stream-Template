@@ -9,7 +9,9 @@ var express = require("express"),
 if (argv.e) {   
     /*
     
-    id : movie IMDB code (required)
+    showTVDB : series/show TVDB code (required)
+    episode : the episode number (as a string) of the episode within the season (required)  
+    season : the season number (as a string) of the season the episode is in
     link : url or magnet to get movie. Support: youtube, magnet link, torrent, direct URL to video (required)
     
     quality : link quality: 1080p, 720p o 480p (optional)
