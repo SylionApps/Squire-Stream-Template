@@ -23,7 +23,7 @@ if (argv.e) {
     var url = 'http://cmpl.me/streams/eztv_episodes.json';
     
     // Send the request
-    request(url, function(error, response, contents) {
+    request(url, function(error, response, contents) {  
         // Check there was no error and we have contents and response
         if(!error && response && contents) {
             // If so then print out the contents which will just be the JSON 
