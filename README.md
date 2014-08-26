@@ -59,13 +59,24 @@ The ```App.js``` file is the responsible for doing all the work and will be call
 When Squire asks your stream for its contents the answer must be a JSON with certain established rules. Also, with the aim of working correctly, it has to take into account certain issues. In brief:
 
 - **Keys**: the returned JSON has to include a minimum set of keys. In case of not having these keys the response will be ignored. On the other hand there’s another set of optional keys which we highly encourage to include in order for the stream to work best. These keys are:
-   - **id** (_required_): IMDB code for the movie.
-link (required): link to access the content. This can be a torrent file, a magnet link or a link to YouTube.
-   - **quality** (_optional_): video quality (720p by default). Three responses are valid: 1080p, 720p and 480p.
-   - **seeders** (_optional_): number of seeders for the link in case it’s a torrent or magnet link.
-   - **size** (_optional_): size in bytes for the content.
 
-Here’s a valid JSON response as an example:
+   - **Movies Streams**	
+      - **id** (_required_): IMDB code for the movie.
+      - **link** (_required_): link to access the content. This can be a torrent file, a magnet link or a link to YouTube.
+      - **quality** (_optional_): video quality (720p by default). Three responses are valid: 1080p, 720p and 480p.
+      - **seeders** (_optional_): number of seeders for the link in case it’s a torrent or magnet link.
+      - **size** (_optional_): size in bytes for the content.
+   
+   - **Shows Streams**	
+      - **id** (_required_): TVDB code for the show.
+      - **link** (_required_): link to access the content. This can be a torrent file, a magnet link or a link to YouTube.
+      - **season** (_required_): number of season.
+      - **episode** (_required_): number of episode.
+      - **quality** (_optional_): video quality (720p by default). Three responses are valid: 1080p, 720p and 480p.
+      - **seeders** (_optional_): number of seeders for the link in case it’s a torrent or magnet link.
+      - **size** (_optional_): size in bytes for the content.
+
+Here’s a valid JSON response for movies as an example:
 
 ```
 [{
@@ -83,6 +94,29 @@ Here’s a valid JSON response as an example:
 },
 ...]
 ```
+
+Here’s other example response for shows:
+
+```
+[{
+  "id" : "tt1254207",
+  "link" : "https://www.youtube.com/watch?v=IdejtDN9gyc",
+  "season"  : "2",
+  "episode"  : "1",
+  "quality"  : "1080p",
+},
+{
+  "id" : "22673",
+  "link" : "magnet:?xt=urn:btih:88b2c9fa7d3493b45130b2907d9ca31fdb8ea7b9&dn=Big+Buck+Bunny+1080p&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com%3A1337",
+  "season"  : "3",
+  "episode"  : "9",
+  "quality"  : "1080p",
+  "seeders"  : "352"
+  "size": "772992851",
+},
+...]
+```
+
 
 - **Timeout**: the response time for the stream can not be over 90 seconds. If the stream doesn't respond in a superior period of time it will be ignored.
 - **Processes**: we absolutely discourage the writing or reading of files with a stream. Any stream that attempts to write or read to disk during the generation of a JSON will be considered malicious.
