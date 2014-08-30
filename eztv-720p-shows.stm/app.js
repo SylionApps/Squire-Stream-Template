@@ -61,7 +61,7 @@ if (argv.e) {
 								JSON.parse(show).episodes.forEach(function(episode, l) {
 									if (episode.torrents.hasOwnProperty(quality)) {
 										episodes.push({
-											showTVDB: JSON.parse(show).tvdb_id,
+											id: JSON.parse(show).tvdb_id,
 											link: episode.torrents[quality].url,
 											season: episode.season,
 											episode: episode.episode,
