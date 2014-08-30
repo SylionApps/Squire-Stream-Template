@@ -12,4 +12,4 @@ Streams is a [Squire](http://www.squireapp.com) feature that lets the user watch
 This repository contains 2 streams which make use of the EZTV (torrent tracker) API. The first EZTV-Mythbusters loads Mythbusters episodes and displays them in Squire and the second loads all shows from EZTV and displays them in Squire. For the EZTV 'all shows' plugin, a remote server keeps track of all available episodes from shows and updates every 30 minutes. The stream on your Mac simply requests this JSON and this is passed onto Squire — this avoids performance issues. 
 
 ## Installation
-Download or clone this repository and double click on the .stm of your choice. The stream will be added automatically to Squire Helper. After a few minutes, the stream’s content will be available in the 'Shows' section on Squire.app. (**NB: At present 'Shows' streams are not available in the present version of Squire, currently in beta**)
+Download or clone this repository and double click on the .stm of your choice. The stream will be added automatically to Squire Helper. After a few minutes, the stream’s content will be available in the 'Shows' section on Squire.app.
