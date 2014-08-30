@@ -11,7 +11,7 @@ var express = require("express"),
 
 /*
 
-showTVDB : series/show TVDB code (required)
+id : series/show TVDB code (required)
 episode : the episode number (as a string) of the episode within the season (required)  
 season : the season number (as a string) of the season the episode is in
 link : url or magnet to get movie. Support: youtube, magnet link, torrent, direct URL to video (required)
@@ -63,7 +63,7 @@ function processShowEpisodes(show, tvdbID, callback) {
                 var episodeNumberString = episode["episodeNumber"].toString();
                 var seasonNumberString = episode["seasonNumber"].toString();
                 // Create JSON object for Squire
-                var episodeJSON = { showTVDB : tvdbID, episode : episodeNumberString, season : seasonNumberString, link : episode["magnet"]};
+                var episodeJSON = { id : tvdbID, episode : episodeNumberString, season : seasonNumberString, link : episode["magnet"]};
                 // Push into episodes JSON array
                 episodesJSON.push(episodeJSON);
             }
@@ -135,7 +135,7 @@ eztv.getShows(null, function(error, results) {
         // For debug purposes keep track of the number of shows processed
         var numShowsProcessed = 0;
         // Push the shows onto the queue
-        queue.push(results.slice(0, 10), function () {
+        queue.push(results, function () {
             // This is called when a show has been processed, increment the number of shows processed variable 
             numShowsProcessed++;
             // Log out the current number of shows processed for debug purposes

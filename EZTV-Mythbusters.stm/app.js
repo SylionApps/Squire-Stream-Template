@@ -9,7 +9,7 @@ var express = require("express"),
 if (argv.e) {   
     /*
     
-    showTVDB : series/show TVDB code (required)
+    id : series/show TVDB code (required)
     episode : the episode number (as a string) of the episode within the season (required)  
     season : the season number (as a string) of the season the episode is in
     link : url or magnet to get movie. Support: youtube, magnet link, torrent, direct URL to video (required)
@@ -48,7 +48,7 @@ if (argv.e) {
                             var episodeNumberString = episode["episodeNumber"].toString();
                             var seasonNumberString = episode["seasonNumber"].toString();
                             // Create JSON object for Squire
-                            var episodeJSON = { showTVDB : "73388", episode : episodeNumberString, season : seasonNumberString, link : episode["magnet"]};
+                            var episodeJSON = { id : "73388", episode : episodeNumberString, season : seasonNumberString, link : episode["magnet"]};
                             // Push into episodes JSON array
                             episodesJSON.push(episodeJSON);
                         }
