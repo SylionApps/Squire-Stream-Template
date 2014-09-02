@@ -41,7 +41,7 @@ if (argv.e) {
 			}
 		});
 		return deferred.promise;
-	}
+	};
 
 	var imdb_ids = [];
 	var episodes = [];
