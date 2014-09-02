@@ -31,53 +31,72 @@ if (argv.e) {
 
 	// --------------------------------------------------------
 
-	var callApi = function(url) {
-		var deferred = Q.defer();
-		request(url, function(error, response, html) {
-			if(!error) {
-				deferred.resolve(html);
-			} else {
-				deferred.reject(new Error(error));
-			}
-		});
-		return deferred.promise;
-	};
 
-	var imdb_ids = [];
-	var episodes = [];
+    Q.
+        fcall(function getShowURLs() {
+            var url = apiEndpoint + apiEndpointShows;
+            return callApi(url);
+        }).
+        then(function getShowsSummary(urls) {
+            // delete unnecessary items
+            urls.splice(numberOfPages);
 
-	// get the desired pages
-	callApi(apiEndpoint + apiEndpointShows).then(function(showPages) {
-		var pages = JSON.parse(showPages).splice(0, numberOfPages);
-		pages.forEach(function(showPage, i) {
-			// get all the imdb ids
-			callApi(apiEndpoint + showPage).then(function(showsOfOnePage) {
-				JSON.parse(showsOfOnePage).forEach(function(show, j) {
-					imdb_ids.push( show.imdb_id );
-					if (pages.length-1 === i && JSON.parse(showsOfOnePage).length-1 === j) {
-						imdb_ids.forEach(function(imdb_id, k) {
-							// get all the magnet links
-							callApi(apiEndpoint + apiEndpointShow + imdb_id).then(function(show) {
-								JSON.parse(show).episodes.forEach(function(episode, l) {
-									if (episode.torrents.hasOwnProperty(quality)) {
-										episodes.push({
-											showTVDB: JSON.parse(show).tvdb_id,
-											link: episode.torrents[quality].url,
-											season: episode.season,
-											episode: episode.episode,
-											quality: quality
-											// seeders: episode.torrents[quality].seeds
-										});
-									}
-									if (imdb_ids.length-1 === k && JSON.parse(show).episodes.length-1 === l) {
-										console.log(JSON.stringify(episodes));
-									}
-								});
-							});
-						});
-					}
-				});
-			});
-		});
-	});
+            var apiCalls = urls.map(function(oneUrl) {
+                var url = apiEndpoint + oneUrl;
+                return callApi(url);
+            });
+            return Q.all(apiCalls);
+        }).
+        then(function getShowsData(summaries) {
+            var imdbIDs = summaries.
+                reduce(function mergePages(soFar, current) {
+                    return soFar.concat(current);
+                }, []).
+                map(function getTheImdbID(oneSummary) {
+                    return oneSummary.imdb_id;
+                });
+
+            var apiCalls = imdbIDs.map(function(oneLink) {
+                var url = apiEndpoint + apiEndpointShow + oneLink;
+                return callApi(url);
+            });
+            return Q.all(apiCalls);
+        }).
+        then(function processData(shows) {
+            var episodes = shows.
+                map(function(oneShow) {
+                    return oneShow.episodes.
+                        filter(function removeBadQualities(oneEpisode) {
+                            return oneEpisode.torrents.hasOwnProperty(quality);
+                        }).
+                        map(function formatTheData(oneEpisode) {
+                            return {
+                                showTVDB: oneShow.tvdb_id,
+                                link: oneEpisode.torrents[quality].url,
+                                season: oneEpisode.season,
+                                episode: oneEpisode.episode,
+                                quality: quality
+                                // seeders: oneEpisode.torrents[quality].seeds
+                            };
+                        });
+                }).
+                reduce(function mergeShows(soFar, current) {
+                    return soFar.concat(current);
+                }, []);
+
+            console.log(JSON.stringify(episodes));
+        }).
+        catch(function(error) {
+            // TODO handle the error event
+            throw error;
+        });
+
+
+    // helpers
+    var callApi = function(url) {
+        // more about `Q.nfcall`: https://github.com/kriskowal/q#adapting-node
+        return Q.nfcall(request, url).then(function(result) {
+            return JSON.parse(result[1]);
+        });
+    };
 }
