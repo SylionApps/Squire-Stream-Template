@@ -48,7 +48,7 @@ if (argv.e) {
                             var episodeNumberString = episode["episodeNumber"].toString();
                             var seasonNumberString = episode["seasonNumber"].toString();
                             // Create JSON object for Squire
-                            var episodeJSON = { id : "73388", episode : episodeNumberString, season : seasonNumberString, link : episode["magnet"]};
+                            var episodeJSON = { id : "73388", showTVDB: "73388", episode : episodeNumberString, season : seasonNumberString, link : episode["magnet"]};
                             // Push into episodes JSON array
                             episodesJSON.push(episodeJSON);
                         }
