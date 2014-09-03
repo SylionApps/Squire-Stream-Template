@@ -71,7 +71,7 @@ if (argv.e) {
                         }).
                         map(function formatTheData(oneEpisode) {
                             return {
-                                showTVDB: oneShow.tvdb_id,
+                                id: oneShow.tvdb_id,
                                 link: oneEpisode.torrents[quality].url,
                                 season: oneEpisode.season,
                                 episode: oneEpisode.episode,
