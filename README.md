@@ -9,7 +9,7 @@
 [Streams](http://www.squireapp.com/streams) is a [Squire](http://www.squireapp.com) feature that lets the user watch content available outside of their hard drive. This means a stream is an ordered collection of items that can be watched in Squire. Each stream is encapsulated in an ```stm``` file. ```stm``` files are added to the Squire Helper which then extracts, orders and organizes the contents for the stream so they can be enjoyed from any available Squire client.
 
 ## Installation
-Download or clone this repository and double click on the .stm file (template.stm on this case). The stream will be added automatically to Squire Helper. After a few seconds, the stream’s content will be available on “Shows” section on Squire.app.
+Download [eztv-720p-shows.zip](https://github.com/iharosi/Squire-Stream-Template/releases/download/v0.1.0/eztv-720p-shows.zip), unzip it and double click on the .stm file (eztv-720p-shows.stm on this case). The stream will be added automatically to Squire Helper. After a few seconds, the stream’s content will be available on “Shows” section on Squire.app.
 
 ## Recommendations
 I do recommend to sort Movies by Popular filter. To do this open Squire.app and press down key to access filter list.
