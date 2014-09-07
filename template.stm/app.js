@@ -2,7 +2,7 @@ var express = require("express"),
 	util 	= require('util'),
     http    = require("http"),
     request = require("request"),
-    argv	= require('minimist')(process.argv.slice(2)),
+    argv	= require('minimist')(process.argv.slice(2));
 
 // MOVIES
 if (argv.m) {	
