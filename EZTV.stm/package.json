@@ -3,7 +3,7 @@
   "author": "jgarnham",
   "icon": "",
   "homepage": "https://github.com/SquaredTiki/Squire-Stream-Template",
-  "version": "0.0.1",
+  "version": "0.2",
   "description": "Squire Streamer for the EZTV service",
   "repository": {
     "type": "git",

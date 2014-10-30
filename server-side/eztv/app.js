@@ -9,6 +9,14 @@ var express = require("express"),
     fs      = require("fs"),
     argv    = require("minimist")(process.argv.slice(2));
 
+// Define a chunk method on the Array prototype
+Array.prototype.chunk = function(chunkSize) {
+    var R = [];
+    for (var i=0; i<this.length; i+=chunkSize)
+        R.push(this.slice(i,i+chunkSize));
+    return R;
+}
+
 /*
 
 id : series/show TVDB code (required)
@@ -113,6 +121,31 @@ function processShow(show, callback) {
     }
 }
 
+// Create an array to hold our upload JSON urls
+var uploadedJSONUrls = [];
+// Define function to handle uploading JSON
+function uploadJSON(episodesArray, callback) {
+    // Get the json array itself
+    // episodesArray = json["arr"];
+    // Make POST request to Myjson API
+    request.post("https://api.myjson.com/bins", { "json": episodesArray },
+        function (error, response, body) {
+            // Check there's no error and we get a valid response code
+            if (!error && response.statusCode == 201) {
+                // Get the url of the the new json
+                var jsonURL = body["uri"]; 
+                console.log("Myjson POST request successful, url: " + jsonURL);
+                // Add it to the array
+                uploadedJSONUrls.push(jsonURL);
+            } else {
+                console.log("Myjson POST request returned an error: " + error + ", response code: " + response.statusCode);
+            }
+            // Call the callback
+            callback();
+        }
+    );
+}
+
 // Get all shows
 eztv.getShows(null, function(error, results) {
     console.log("callback for getShows received, error? " + error + ", # results: " + results.length);
@@ -123,13 +156,33 @@ eztv.getShows(null, function(error, results) {
         var queue = async.queue(processShow, 50);
         // Set the callback for when the queue has been drained fully (all shows processed)
         queue.drain = function() {
-            console.log("All shows processed, now saving JSON…");
+            console.log("All shows processed, now uploading JSON chunks…");
+            // Create upload queue
+            var uploadQueue = async.queue(uploadJSON, 1);
+            // Split the array into 4
+            var jsonChunks = episodesJSON.chunk(Math.ceil(episodesJSON.length / 15));
+            console.log("Chunk count: " + jsonChunks.length);
+            // Set the queue drain callback
+            uploadQueue.drain = function() {
+                console.log("All JSON chunks uploaded, writing out URLs and cached TVDB ids…");
+                // Define the path to save the upload JSON URLs to
+                var uploadUrlsFilePath = "/Library/WebServer/Documents/streams/eztv_chunk_urls_e.json";
+                // Write the urls out
+                fs.writeFileSync(uploadUrlsFilePath, JSON.stringify(uploadedJSONUrls, null, 2));
+                // Also, write out the cached tvdb ids
+                fs.writeFileSync(cachedTvdbFilePath, JSON.stringify(cachedTvdbIDs, null, 2));
+            };
+            // Push this onto the queue
+            uploadQueue.push(jsonChunks);
+
+            /*
             // Define the path to save the episodes JSON to
             var episodesJSONFilePath = "/Library/WebServer/Documents/streams/eztv_episodes.json";
             // Write the episodes JSON
             fs.writeFileSync(episodesJSONFilePath, JSON.stringify(episodesJSON, null, 2));
             // Also, write out the cached tvdb ids
             fs.writeFileSync(cachedTvdbFilePath, JSON.stringify(cachedTvdbIDs, null, 2));
+            */
         };
 
         // For debug purposes keep track of the number of shows processed
