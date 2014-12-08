@@ -40,7 +40,7 @@ if (argv.m) {
 	request(url, function(error, response, html) {
 	
 		if(!error) {
-			console.log(JSON.stringify(html));
+			console.log(html);
 		}
 		else {
 			var empty = [];
@@ -90,7 +90,7 @@ if (argv.e) {
 	request(url, function(error, response, html) {
 	
 		if(!error) {
-			console.log(JSON.stringify(html));
+			console.log(html);
 		}
 		else {
 			var empty = [];
