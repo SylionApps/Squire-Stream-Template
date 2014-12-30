@@ -53,7 +53,7 @@ if (argv.e) {
             var chunkUrls = JSON.parse(contents);
             // console.log("Chunk URLs loaded:\n" + chunkUrls);
             // Create queue (allow 4 simaltaneously)
-            var chunkProcessQueue = async.queue(processChunk, 1);
+            var chunkProcessQueue = async.queue(processChunk, 4);
             // Set the queue drain callback
             chunkProcessQueue.drain = function() {
                 // Remove last comma in episodes JSON and add a ]

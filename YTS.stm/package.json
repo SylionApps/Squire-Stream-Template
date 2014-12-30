@@ -1,0 +1,27 @@
+{
+  "name": "YTS.re",
+  "author": "jgarnham",
+  "icon": "",
+  "homepage": "https://github.com/SquaredTiki/Squire-Stream-Template",
+  "version": "0.1",
+  "description": "Squire Streamer for the YTS.re service",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SquaredTiki/Squire-Stream-Template"
+  },
+  "license": "MIT",
+  "keywords": [
+    "tv",
+    "eztv",
+    "torrent",
+    "magnet",
+    "squire",
+    "streamer",
+    "squire streamer"
+  ],
+  "dependencies": {
+    "express": "3.2.6",
+    "minimist": "0.2.0",
+    "request": "latest"
+  }
+}
