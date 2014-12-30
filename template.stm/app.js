@@ -14,6 +14,7 @@ if (argv.m) {
 	quality : link quality: 1080p, 720p o 480p (optional)
 	seeders : number of seeders if link is a magnet or torrent file (optional)
 	size : size del link (optional)
+	fileIndex : if the magnet/torrent has several files, should specify the file index into it (optional for torrent or magnet link)
 	
 	*/
 	
@@ -64,6 +65,7 @@ if (argv.e) {
 	quality : link quality: 1080p, 720p o 480p (optional)
 	seeders : number of seeders if link is a magnet or torrent file (optional)
 	size : size del link (optional)
+	fileIndex : if the magnet/torrent has several files, should specify the file index into it (optional for torrent or magnet link)
 	
 	*/
 	
