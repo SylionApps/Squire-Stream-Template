@@ -4,6 +4,7 @@
 
 - [Squire Site](http://www.squireapp.com)
 - [Squire Stream Site](http://squireapp.com/features#streams)
+- [User created streams for Squire](http://squirestreams.com/)
 
 ## Overview
 [Streams](http://squireapp.com/features#streams) is a [Squire](http://www.squireapp.com) feature that lets the user watch content available outside of their hard drive. This means a stream is an ordered collection of items that can be watched in Squire. Each stream is encapsulated in an ```stm``` file. ```stm``` files are added to the Squire Helper which then extracts, orders and organizes the contents for the stream so they can be enjoyed from any available Squire client.
