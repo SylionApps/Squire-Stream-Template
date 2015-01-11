@@ -31,7 +31,7 @@ size : size del link (optional)
 */
 
 // Get any cached TVDB data, define the file's location
-var cachedTvdbFilePath =  "tvdbCached.json";
+var cachedTvdbFilePath =  "/Users/joshuagarnham/Dropbox/Projects/Other/Node/Squire-Streams/server-side/eztv/tvdbCached.json";
 // Create dictionary to store the cached TVDB data which may be added to later
 var cachedTvdbIDs = {};
 // Check it exists
@@ -87,9 +87,9 @@ function processShow(show, callback) {
     // Get the show's ID and title
     var showID = show["id"];
     var showTitle = show["title"];
-    // console.log("processing show: " + showTitle);
-    // Remove brackets from show title
-    showTitle = showTitle.replace(/\((.*?)\)/g, "")
+    // console.log("processing show: " + showTitle + " and id:" +showID);
+    // Remove brackets, years, and country codes (just US) from show title
+    showTitle = showTitle.replace(/(\((.*?)\))|((19|20)\d{2})|US/g, "")
 
     // Check if we have a TVDB code cached
     if (cachedTvdbIDs[showID]) {
@@ -158,8 +158,8 @@ eztv.getShows(null, function(error, results) {
         queue.drain = function() {
             console.log("All shows processed, now uploading JSON chunks…");
             // Create upload queue
-            var uploadQueue = async.queue(uploadJSON, 1);
-            // Split the array into 4
+            var uploadQueue = async.queue(uploadJSON, 5);
+            // Split the array into 15
             var jsonChunks = episodesJSON.chunk(Math.ceil(episodesJSON.length / 15));
             console.log("Chunk count: " + jsonChunks.length);
             // Set the queue drain callback

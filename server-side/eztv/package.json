@@ -21,9 +21,10 @@
   ],
   "dependencies": {
     "express": "3.2.6",
-    "eztv": "0.0.4",
+    "eztv": "latest",
     "minimist": "0.2.0",
     "node-tvdb": "^0.3.2",
-    "request": "latest"
+    "request": "latest",
+    "async": "latest"
   }
 }
