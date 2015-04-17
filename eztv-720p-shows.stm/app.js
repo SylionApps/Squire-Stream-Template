@@ -24,7 +24,7 @@ if (argv.e) {
 	// --------------------------------------------------------
 
 	var quality = '720p'; // 1080p, 720p, 480p, 0
-	var numberOfPages = 15; // has to be between 1 and 18
+	var numberOfPages = 10; // Between 1 and 18. Be careful big numbers need more memory.
 	var apiEndpoint = "http://eztvapi.re/";
 	var apiEndpointShow = 'show/';
 	var apiEndpointShows = 'shows/';
