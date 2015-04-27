@@ -1,36 +1,45 @@
-var Q       = require('Q'),
-	express = require("express"),
-	util 	= require('util'),
-    http    = require("http"),
-    request = require("request"),
-    argv	= require('minimist')(process.argv.slice(2));
+/* jshint node: true */
+'use strict';
+
+var express = require('express');
+var request = require('request');
+var http = require('http');
+var util = require('util');
+var argv = require('minimist')(process.argv.slice(2));
+var Q = require('Q');
 
 // EPISODES
 if (argv.e) {
-	/*
-
-	id       : show TVDB code (required)
-	link 	 : url or magnet to get episode. Support: youtube, magnet link, torrent, direct URL to video (required)
-	season 	 : number of season
-	episode  : number of episode
-
-	quality  : link quality: 1080p, 720p o 480p (optional)
-	seeders  : number of seeders if link is a magnet or torrent file (optional)
-	size 	 : size del link (optional)
-
-	*/
+    /*
+    id:         show TVDB code (required)
+    link:       url or magnet to get episode. Support: youtube, magnet link,
+                torrent, direct URL to video (required)
+    season:     number of season
+    episode:    number of episode
+    
+    quality:    1080p, 720p or 480p (optional)
+    seeders:    number of seeders if link is a magnet or torrent file (optional)
+    size:       size of the medium (optional)
+    fileIndex:  if the magnet/torrent has several files, should specify
+                the file index into it (optional for torrent or magnet link)
+    */
 
 	// Variables
 	// --------------------------------------------------------
+	var quality = '720p';
+	var numberOfPages = 10; // Between 1 and 18.
+	var apiEndpoint = 'http://fr.api.ptn.pm/';
+    var apiEndpointShow = 'show/';
+    var apiEndpointShows = 'shows/';
+    // --------------------------------------------------------
 
-	var quality = '720p'; // 1080p, 720p, 480p, 0
-	var numberOfPages = 10; // Between 1 and 18. Be careful big numbers need more memory.
-	var apiEndpoint = "http://eztvapi.re/";
-	var apiEndpointShow = 'show/';
-	var apiEndpointShows = 'shows/';
-
-	// --------------------------------------------------------
-
+    // helpers
+    var callApi = function(url) {
+        // more about `Q.nfcall`: https://github.com/kriskowal/q#adapting-node
+        return Q.nfcall(request, url).then(function(result) {
+            return JSON.parse(result[1]);
+        });
+    };
 
     Q.
         fcall(function getShowURLs() {
@@ -77,26 +86,18 @@ if (argv.e) {
                                 episode: oneEpisode.episode,
                                 quality: quality
                                 // seeders: oneEpisode.torrents[quality].seeds
+                                // eztv api always return with 0 seeders so
+                                // it is useless in this case
                             };
                         });
                 }).
                 reduce(function mergeShows(soFar, current) {
                     return soFar.concat(current);
                 }, []);
-
             console.log(JSON.stringify(episodes));
         }).
-        catch(function(error) {
-            // TODO handle the error event
-            throw error;
+        catch(function() {
+            // on error print out an empty array
+            console.log(JSON.stringify([]));
         });
-
-
-    // helpers
-    var callApi = function(url) {
-        // more about `Q.nfcall`: https://github.com/kriskowal/q#adapting-node
-        return Q.nfcall(request, url).then(function(result) {
-            return JSON.parse(result[1]);
-        });
-    };
 }
