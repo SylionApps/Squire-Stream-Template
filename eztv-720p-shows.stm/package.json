@@ -17,9 +17,9 @@
     "EZTV"
   ],
   "dependencies": {
-    "express": "3.2.6",
-    "minimist": "0.2.0",
-    "q": "^1.0.1",
-    "request": "latest"
+    "express": "latest",
+    "request": "latest",
+    "minimist": "latest",
+    "q": "latest"
   }
 }
