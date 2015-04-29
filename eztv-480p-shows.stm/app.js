@@ -6,7 +6,9 @@ var request = require('request');
 var http = require('http');
 var util = require('util');
 var argv = require('minimist')(process.argv.slice(2));
-var Q = require('Q');
+if (!('Promise' in process)) {
+    var Promise = require('promise-polyfill');
+}
 
 // EPISODES
 if (argv.e) {
@@ -27,77 +29,76 @@ if (argv.e) {
 	// Variables
 	// --------------------------------------------------------
 	var quality = '480p';
-	var numberOfPages = 10; // Between 1 and 18.
 	var apiEndpoint = 'http://fr.api.ptn.pm/';
-    var apiEndpointShow = 'show/';
-    var apiEndpointShows = 'shows/';
     // --------------------------------------------------------
 
     // helpers
     var callApi = function(url) {
-        // more about `Q.nfcall`: https://github.com/kriskowal/q#adapting-node
-        return Q.nfcall(request, url).then(function(result) {
-            return JSON.parse(result[1]);
+        return new Promise(function(resolve, reject) {
+            request.get(url, function(error, response, body) {
+                if (!error && response.statusCode === 200) {
+                    var result;
+                    try {
+                        result = JSON.parse(body);
+                    } catch(e) {
+                        resolve([]);
+                    }
+                    resolve(result);
+                } else {
+                    resolve([]);
+                }
+            });
         });
     };
 
-    Q.
-        fcall(function getShowURLs() {
-            var url = apiEndpoint + apiEndpointShows;
-            return callApi(url);
+    callApi(apiEndpoint + 'shows').
+        then(function getPageUrls(pageUrls) {
+            return Promise.all(
+                pageUrls.map(function(onePageUrl) {
+                    return callApi(apiEndpoint + onePageUrl);
+                })
+            );
         }).
-        then(function getShowsSummary(urls) {
-            // delete unnecessary items
-            urls.splice(numberOfPages);
-
-            var apiCalls = urls.map(function(oneUrl) {
-                var url = apiEndpoint + oneUrl;
-                return callApi(url);
-            });
-            return Q.all(apiCalls);
+        then(function fetchPageUrls(shows) {
+            return Promise.all(
+                Array.prototype.concat.apply([], shows).map(function(oneShow) {
+                        return callApi(apiEndpoint + 'show/' + oneShow._id);
+                    }
+                )
+            );
         }).
-        then(function getShowsData(summaries) {
-            var imdbIDs = summaries.
-                reduce(function mergePages(soFar, current) {
+        then(function getShowDetails(details) {
+            return Promise.resolve(
+                Array.prototype.concat.apply([], details).filter(
+                    function(oneShow) {
+                        return typeof oneShow.tvdb_id === 'string' &&
+                                      oneShow.tvdb_id.length > 4;
+                    }
+                ).map(function(oneShow) {
+                    var tvdb_id = oneShow.tvdb_id;
+                    return oneShow.episodes.filter(function(oneEpisode) {
+                        return oneEpisode.torrents.hasOwnProperty(quality);
+                    }).map(function(oneEpisode) {
+                        return {
+                            id: tvdb_id,
+                            link: oneEpisode.torrents[quality].url,
+                            season: oneEpisode.season,
+                            episode: oneEpisode.episode,
+                            quality: quality
+                            // seeders: oneEpisode.torrents[quality].seeds
+                            // eztv api always return with 0 seeders so
+                            // it is useless in this case
+                        };
+                    });
+                }).reduce(function mergeShows(soFar, current) {
                     return soFar.concat(current);
-                }, []).
-                map(function getTheImdbID(oneSummary) {
-                    return oneSummary.imdb_id;
-                });
-
-            var apiCalls = imdbIDs.map(function(oneLink) {
-                var url = apiEndpoint + apiEndpointShow + oneLink;
-                return callApi(url);
-            });
-            return Q.all(apiCalls);
+                }, [])
+            );
         }).
-        then(function processData(shows) {
-            var episodes = shows.
-                map(function(oneShow) {
-                    return oneShow.episodes.
-                        filter(function removeBadQualities(oneEpisode) {
-                            return oneEpisode.torrents.hasOwnProperty(quality);
-                        }).
-                        map(function formatTheData(oneEpisode) {
-                            return {
-                                id: oneShow.tvdb_id,
-                                link: oneEpisode.torrents[quality].url,
-                                season: oneEpisode.season,
-                                episode: oneEpisode.episode,
-                                quality: quality
-                                // seeders: oneEpisode.torrents[quality].seeds
-                                // eztv api always return with 0 seeders so
-                                // it is useless in this case
-                            };
-                        });
-                }).
-                reduce(function mergeShows(soFar, current) {
-                    return soFar.concat(current);
-                }, []);
-            console.log(JSON.stringify(episodes));
+        catch(function(e) {
+            return Promise.resolve([]);
         }).
-        catch(function() {
-            // on error print out an empty array
-            console.log(JSON.stringify([]));
+        then(function(result) {
+            console.log(JSON.stringify(result));
         });
 }
