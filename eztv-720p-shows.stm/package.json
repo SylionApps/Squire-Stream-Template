@@ -2,12 +2,12 @@
   "name": "EZTV-720p-Shows",
   "author": "iharosi",
   "icon": "",
-  "homepage": "https://github.com/iharosi/Squire-Stream-Template.git",
+  "homepage": "https://github.com/iharosi/Squire-Streams.git",
   "version": "0.1.2",
   "description": "Squire Streamer for EZTV service",
   "repository": {
     "type": "git",
-    "url": "https://github.com/iharosi/Squire-Stream-Template.git"
+    "url": "https://github.com/iharosi/Squire-Streams.git"
   },
   "license": "MIT",
   "keywords": [
