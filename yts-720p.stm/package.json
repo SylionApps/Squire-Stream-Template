@@ -1,0 +1,25 @@
+{
+  "name": "YTS-720p-Movies",
+  "author": "iharosi",
+  "icon": "",
+  "homepage": "https://github.com/iharosi/Squire-Streams.git",
+  "version": "0.1.1",
+  "description": "Squire Streamer for YTS service",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iharosi/Squire-Streams.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "squire",
+    "streamer",
+    "squire streamer",
+    "EZTV"
+  ],
+  "dependencies": {
+    "express": "latest",
+    "minimist": "latest",
+    "promise-polyfill": "latest",
+    "request": "latest"
+  }
+}
