@@ -22,8 +22,8 @@
   "plusplus": true,
   "maxparams": 5,
   "maxdepth": 5,
-
   "maxerr": 20,
-
-  "browser": true
+  "browser": false,
+  "esnext": false,
+  "node": true
 }
