@@ -18,7 +18,7 @@ if (argv.e) {
                 torrent, direct URL to video (required)
     season:     number of season
     episode:    number of episode
-    
+
     quality:    1080p, 720p or 480p (optional)
     seeders:    number of seeders if link is a magnet or torrent file (optional)
     size:       size of the medium (optional)
@@ -75,12 +75,11 @@ if (argv.e) {
                                       oneShow.tvdb_id.length > 4;
                     }
                 ).map(function(oneShow) {
-                    var tvdb_id = oneShow.tvdb_id;
                     return oneShow.episodes.filter(function(oneEpisode) {
                         return oneEpisode.torrents.hasOwnProperty(quality);
                     }).map(function(oneEpisode) {
                         return {
-                            id: tvdb_id,
+                            id: oneShow.tvdb_id,
                             link: oneEpisode.torrents[quality].url,
                             season: oneEpisode.season,
                             episode: oneEpisode.episode,
