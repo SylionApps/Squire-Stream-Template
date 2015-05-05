@@ -1,0 +1,25 @@
+{
+  "name": "EZTV-Shows",
+  "author": "iharosi",
+  "icon": "",
+  "homepage": "https://github.com/iharosi/Squire-Streams.git",
+  "version": "0.1.2",
+  "description": "Squire Streamer for EZTV service",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iharosi/Squire-Streams.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "squire",
+    "streamer",
+    "squire streamer",
+    "EZTV"
+  ],
+  "dependencies": {
+    "express": "latest",
+    "minimist": "latest",
+    "promise-polyfill": "latest",
+    "request": "latest"
+  }
+}
