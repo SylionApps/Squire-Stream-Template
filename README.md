@@ -12,18 +12,25 @@
 ## Installation
 1. Download the desired package:
 
-    TV series – EZTV
-    - [1080p quality](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.0/eztv-1080p-shows.zip)
-    - [720p quality](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.0/eztv-720p-shows.zip) (recommended)
-    - [480p quality](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.0/eztv-480p-shows.zip)
+    TV series – EZTV (always picks the best quality which is available)
+    - [EZTV Shows](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.0/eztv-shows.zip)  
+    There are 892 shows with a total of 29911 episodes available on last check
+
+    TV series – EZTV (separate qualities)
+    - [EZTV Shows - 1080p](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.0/eztv-1080p-shows.zip)  
+    There are 67 shows with a total of 173 episodes available on last check
+    - [EZTV Shows - 720p](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.0/eztv-720p-shows.zip)  
+    There are 309 shows with a total of 4538 episodes available on last check
+    - [EZTV Shows - 480p](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.0/eztv-480p-shows.zip)  
+    There are 833 shows with a total of 29317 episodes available on last check
 
     Movies - YTS
-    - [1080p quality](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.0/yts-1080p-movies.zip)
-    - [720p quality](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.0/yts-720p-movies.zip) (recommended)
-    - [3D quality](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.0/yts-3D-movies.zip) (Note: Squire app does not support this feature at this time.)
+    - [YTS Movies - 1080p](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.0/yts-1080p-movies.zip)
+    - [YTS Movies - 720p](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.0/yts-720p-movies.zip)
+    - [YTS Movies - 3D](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.0/yts-3D-movies.zip) - Note: Squire app does not support this feature at this time.
 
-2. Unzip it and double click on the .stm file.  
-The stream will be added automatically to Squire Helper.  
+2. Unzip it and double click on the .stm file.
+The stream will be added automatically to Squire Helper.
 After a few seconds, the stream’s content will be available in “Shows” section of Squire app.
 
 ## Support
