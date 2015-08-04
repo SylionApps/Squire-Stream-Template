@@ -75,7 +75,20 @@ if (argv.e) {
                                       oneShow.tvdb_id.length > 4;
                     }
                 ).map(function(oneShow) {
-                    return oneShow.episodes.map(function(oneEpisode) {
+                    return oneShow.episodes.filter(function(episode) {
+                        return
+                            episode.hasOwnProperty('season') &&
+                            episode.hasOwnProperty('episode') &&
+                            episode.hasOwnProperty('torrents') &&
+                            qualities.some(function(quality) {
+                                var torrents = episode.torrents;
+                                if (torrents.hasOwnProperty(quality) &&
+                                    torrents[quality] !== null) {
+                                        var epQuality = torrents[quality];
+                                        return epQuality.hasOwnProperty('url');
+                                    }
+                                });
+                    }).map(function(oneEpisode) {
                         var bestQuality;
                         qualities.sort(function(a, b) {
                             return parseInt(b, 10) - parseInt(a, 10);
