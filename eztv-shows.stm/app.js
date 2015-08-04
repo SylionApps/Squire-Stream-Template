@@ -75,14 +75,17 @@ if (argv.e) {
                                       oneShow.tvdb_id.length > 4;
                     }
                 ).map(function(oneShow) {
-                    return oneShow.episodes.filter(function(oneEpisode) {
-                        return !!oneEpisode.hasOwnProperty('season') &&
-                               !!oneEpisode.hasOwnProperty('episode') &&
-                                qualities.some(function(quality) {
-                                   if (oneEpisode.hasOwnProperty('torrents')) {
-                                       if (oneEpisode.torrents.hasOwnProperty(quality) && oneEpisode.torrents[quality] !== null) {
-                                           return oneEpisode.torrents[quality].hasOwnProperty('url');
-                                        }                                    }
+                    return oneShow.episodes.filter(function(episode) {
+                        return episode.hasOwnProperty('torrents') &&
+                            episode.hasOwnProperty('season') &&
+                            episode.hasOwnProperty('episode') &&
+                            qualities.some(function(quality) {
+                                var torrents = episode.torrents;
+                                if (torrents.hasOwnProperty(quality) &&
+                                    torrents[quality] !== null) {
+                                        var epQuality = torrents[quality];
+                                        return epQuality.hasOwnProperty('url');
+                                    }
                                 });
                     }).map(function(oneEpisode) {
                         var bestQuality;
