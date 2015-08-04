@@ -113,10 +113,9 @@ if (argv.e) {
             );
         }).
         catch(function(e) {
-            return Promise.resolve(e);
+            return Promise.resolve([]);
         }).
         then(function(result) {
-            console.log(result);
-            // console.log(JSON.stringify(result));
+            console.log(JSON.stringify(result));
         });
 }
