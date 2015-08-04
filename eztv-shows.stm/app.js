@@ -76,18 +76,16 @@ if (argv.e) {
                     }
                 ).map(function(oneShow) {
                     return oneShow.episodes.filter(function(episode) {
-                        return
-                            episode.hasOwnProperty('season') &&
+                        return episode.hasOwnProperty('season') &&
                             episode.hasOwnProperty('episode') &&
                             episode.hasOwnProperty('torrents') &&
                             qualities.some(function(quality) {
-                                var torrents = episode.torrents;
-                                if (torrents.hasOwnProperty(quality) &&
-                                    torrents[quality] !== null) {
-                                        var epQuality = torrents[quality];
-                                        return epQuality.hasOwnProperty('url');
-                                    }
-                                });
+                                if (episode.torrents.hasOwnProperty(quality) &&
+                                    episode.torrents[quality] !== null) {
+                                        return episode.torrents[quality].
+                                            hasOwnProperty('url');
+                                }
+                            });
                     }).map(function(oneEpisode) {
                         var bestQuality;
                         qualities.sort(function(a, b) {
@@ -115,9 +113,10 @@ if (argv.e) {
             );
         }).
         catch(function(e) {
-            return Promise.resolve([]);
+            return Promise.resolve(e);
         }).
         then(function(result) {
-            console.log(JSON.stringify(result));
+            console.log(result);
+            // console.log(JSON.stringify(result));
         });
 }
