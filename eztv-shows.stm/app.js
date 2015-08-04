@@ -76,9 +76,10 @@ if (argv.e) {
                     }
                 ).map(function(oneShow) {
                     return oneShow.episodes.filter(function(episode) {
-                        return episode.hasOwnProperty('torrents') &&
+                        return
                             episode.hasOwnProperty('season') &&
                             episode.hasOwnProperty('episode') &&
+                            episode.hasOwnProperty('torrents') &&
                             qualities.some(function(quality) {
                                 var torrents = episode.torrents;
                                 if (torrents.hasOwnProperty(quality) &&
