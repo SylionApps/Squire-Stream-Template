@@ -28,14 +28,14 @@ if (argv.m) {
     // --------------------------------------------------------
     var numberOfPages = 10;
     var params = {
-        limit: 50, // Integer between 1 - 50 (inclusive)
-        quality: '1080p', // String (720p, 1080p, 3D)
-        sort_by: 'year', // String (title, year, rating, peers, seeds,
-                         // download_count, like_count, date_added)
-        minimum_rating: '6', // Integer between 0 - 9 (inclusive)
+        limit: 50,              // Integer between 1 - 50 (inclusive)
+        quality: '1080p',       // String (720p, 1080p, 3D)
+        sort_by: 'year',        // String (title, year, rating, peers, seeds,
+                                // download_count, like_count, date_added)
+        minimum_rating: '0',    // Integer between 0 - 9 (inclusive)
         page: 0
     };
-    var apiEndpoint = 'https://yts.to/api/v2/list_movies.json';
+    var apiEndpoint = 'https://yts.ag/api/v2/list_movies.json';
     // --------------------------------------------------------
 
     Promise.all(
