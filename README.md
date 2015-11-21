@@ -12,7 +12,7 @@
 ## Installation
 1. Download the desired package:
 
-    ~~TV series – EZTV (always picks the best quality which is available)
+    TV series – EZTV (always picks the best quality which is available)
     - [EZTV Shows](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.0/eztv-shows.zip)  
     There are 892 shows with a total of 29911 episodes available on last check
 
@@ -22,14 +22,14 @@
     - [EZTV Shows - 720p](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.0/eztv-720p-shows.zip)  
     There are 309 shows with a total of 4538 episodes available on last check
     - [EZTV Shows - 480p](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.0/eztv-480p-shows.zip)  
-    There are 833 shows with a total of 29317 episodes available on last check~~
+    There are 833 shows with a total of 29317 episodes available on last check
     
     **EZTV streams are not working until we find a new working API for series.**
 
     Movies - YTS
-    - [YTS Movies - 1080p](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.0/yts-1080p-movies.zip)
-    - [YTS Movies - 720p](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.0/yts-720p-movies.zip)
-    - [YTS Movies - 3D](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.0/yts-3D-movies.zip) - Note: Squire app does not support this feature at this time.
+    - [YTS Movies - 1080p](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.1/yts-1080p-movies.stm.zip)
+    - [YTS Movies - 720p](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.1/yts-720p-movies.stm.zip)
+    - [YTS Movies - 3D](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.1/yts-3D-movies.stm.zip) - Note: Squire app does not support this feature at this time.
 
 2. Unzip it and double click on the .stm file.
 The stream will be added automatically to Squire Helper.
