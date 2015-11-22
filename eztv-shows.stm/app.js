@@ -29,7 +29,7 @@ if (argv.e) {
 	// Variables
 	// --------------------------------------------------------
 	var qualities = [ '2160p', '1080p', '720p', '480p', '0' ];
-	var apiEndpoint = 'http://fr.api.ptn.pm/';
+	var apiEndpoint = 'https://www.popcorntime.ws/api/eztv/';
     // --------------------------------------------------------
 
     // helpers
@@ -51,7 +51,7 @@ if (argv.e) {
         });
     };
 
-    callApi(apiEndpoint + 'shows').
+    callApi(apiEndpoint + 'shows/').
         then(function getPageUrls(pageUrls) {
             return Promise.all(
                 pageUrls.map(function(onePageUrl) {
@@ -97,6 +97,7 @@ if (argv.e) {
                             }
                         });
                         return {
+                            // _id: oneShow._id,
                             id: oneShow.tvdb_id,
                             link: oneEpisode.torrents[bestQuality].url,
                             season: oneEpisode.season,
@@ -106,6 +107,8 @@ if (argv.e) {
                             // eztv api always return with 0 seeders so
                             // it is useless in this case
                         };
+                    }).filter(function(obj) {
+                        return /^(magnet|http)/.test(obj.link);
                     });
                 }).reduce(function mergeShows(soFar, current) {
                     return soFar.concat(current);

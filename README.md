@@ -13,18 +13,16 @@
 1. Download the desired package:
 
     TV series – EZTV (always picks the best quality which is available)
-    - [EZTV Shows](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.0/eztv-shows.zip)  
+    - [EZTV Shows](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.1/eztv-shows.zip)  
     There are 892 shows with a total of 29911 episodes available on last check
 
     TV series – EZTV (separate qualities)
-    - [EZTV Shows - 1080p](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.0/eztv-1080p-shows.zip)  
+    - [EZTV Shows - 1080p](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.1/eztv-1080p-shows.zip)  
     There are 67 shows with a total of 173 episodes available on last check
-    - [EZTV Shows - 720p](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.0/eztv-720p-shows.zip)  
+    - [EZTV Shows - 720p](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.1/eztv-720p-shows.zip)  
     There are 309 shows with a total of 4538 episodes available on last check
-    - [EZTV Shows - 480p](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.0/eztv-480p-shows.zip)  
+    - [EZTV Shows - 480p](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.1/eztv-480p-shows.zip)  
     There are 833 shows with a total of 29317 episodes available on last check
-    
-    **EZTV streams are not working until we find a new working API for series.**
 
     Movies - YTS
     - [YTS Movies - 1080p](https://github.com/iharosi/Squire-Streams/releases/download/v0.2.1/yts-1080p-movies.stm.zip)
