@@ -32,7 +32,7 @@ if (argv.m) {
         quality: '720p',        // String (720p, 1080p, 3D)
         sort_by: 'year',        // String (title, year, rating, peers, seeds,
                                 // download_count, like_count, date_added)
-        minimum_rating: '6',    // Integer between 0 - 9 (inclusive)
+        minimum_rating: '0',    // Integer between 0 - 9 (inclusive)
         page: 0
     };
     var apiEndpoint = 'https://yts.ag/api/v2/list_movies.json';
