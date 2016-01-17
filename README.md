@@ -65,8 +65,6 @@ When Squire asks your stream for its contents the answer must be a JSON with cer
       - **link** (_required_): link to access the content. This can be a torrent file, a magnet link or a link to YouTube.
       - **quality** (_optional_): video quality (720p by default). Three responses are valid: 3D, 1080p, 720p and 480p.
       - **language** (_optional_): audio language ISO 639-1 code (en by default). You can read the complete ISO 639-1 codes [here](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
-      - **seeders** (_optional_): number of seeders for the link in case it’s a torrent or magnet link.
-      - **size** (_optional_): size in bytes for the content.
       - **fileIndex** (_optional_): index file if the torrent/magnet link has several files (only for torrent/magnet links).
    
    - **Shows Streams**	
@@ -76,8 +74,6 @@ When Squire asks your stream for its contents the answer must be a JSON with cer
       - **episode** (_required_): number of episode.
       - **quality** (_optional_): video quality (720p by default). Three responses are valid: 3D, 1080p, 720p and 480p.
       - **language** (_optional_): audio language ISO 639-1 code (en by default). You can read the complete ISO 639-1 codes [here](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
-      - **seeders** (_optional_): number of seeders for the link in case it’s a torrent or magnet link.
-      - **size** (_optional_): size in bytes for the content.
       - **fileIndex** (_optional_): index file if the torrent/magnet link has several files (only for torrent/magnet links).
 
 Here’s a valid JSON response for movies as an example:
@@ -87,16 +83,13 @@ Here’s a valid JSON response for movies as an example:
   "id" : "tt1254207",
   "link" : "https://www.youtube.com/watch?v=IdejtDN9gyc",
   "language"  : "en",
-  "quality"  : "1080p",
-  "size": "149946368",
+  "quality"  : "1080p"
 },
 {
   "id" : "tt1254207",
   "link" : "magnet:?xt=urn:btih:88b2c9fa7d3493b45130b2907d9ca31fdb8ea7b9&dn=Big+Buck+Bunny+1080p&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com%3A1337",
   "language"  : "en",
-  "quality"  : "1080p",
-  "seeders"  : "16"
-  "size": "902487334",
+  "quality"  : "1080p"
 },
 ...]
 ```
@@ -118,9 +111,7 @@ Here’s other example response for shows:
   "season"  : "3",
   "episode"  : "9",
   "language"  : "en",
-  "quality"  : "1080p",
-  "seeders"  : "352"
-  "size": "772992851",
+  "quality"  : "1080p"
 },
 ...]
 ```
