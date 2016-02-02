@@ -36,7 +36,7 @@ if (argv.m) {
 	// MODE 2 : other languages. External API code (recommended)
 	// --------------------------------------------------------
 	
-	var url = 'ENTER YOUR HTTP HERE';
+	var url = 'https://yts.ag';
 	
 	request(url, function(error, response, html) {
 	
