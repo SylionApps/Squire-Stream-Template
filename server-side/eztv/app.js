@@ -24,9 +24,8 @@ episode : the episode number (as a string) of the episode within the season (req
 season : the season number (as a string) of the season the episode is in
 link : url or magnet to get movie. Support: youtube, magnet link, torrent, direct URL to video (required)
 
-quality : link quality: 1080p, 720p o 480p (optional)
-seeders : number of seeders if link is a magnet or torrent file (optional)
-size : size del link (optional)
+quality (optional): video quality (720p by default). Three responses are valid: 3D, 1080p, 720p and 480p.
+language (optional): audio language ISO 639-1 code (en by default). You can read the complete ISO 639-1 codes here (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
 
 */
 
@@ -121,8 +120,9 @@ function processShowEpisodes(show, callback) {
                         // console.log("s" + episode["seasonNumber"] + "e" + episode["episodeNumber"] + "\n");
                         var episodeNumberString = episode["episodeNumber"].toString();
                         var seasonNumberString = episode["seasonNumber"].toString();
+                        // !!!: set at 100 to fix bug in current version 5/01/2015 of Squire Helper with Apple TV
                         // Create JSON object for Squire
-                        var episodeJSON = { id : tvdbID, showTVDB : tvdbID, episode : episodeNumberString, season : seasonNumberString, link : episode["magnet"]};
+                        var episodeJSON = { id : tvdbID, showTVDB : tvdbID, episode : episodeNumberString, season : seasonNumberString, seeders : "100", link : episode["magnet"]};
                         // Push into episodes JSON array
                         episodesJSON.push(episodeJSON);
                     }
@@ -137,8 +137,11 @@ function processShowEpisodes(show, callback) {
     });
 }
 
+
 // Create an array to hold our upload JSON urls
 var uploadedJSONUrls = [];
+// Create upload queue
+var uploadQueue = async.queue(uploadJSON, 5);
 // Define function to handle uploading JSON
 function uploadJSON(episodesArray, callback) {
     // Make POST request to Myjson API
@@ -152,7 +155,9 @@ function uploadJSON(episodesArray, callback) {
                 // Add it to the array
                 uploadedJSONUrls.push(jsonURL);
             } else {
-                console.log("Myjson POST request returned an error: " + error + ", response code: " + response.statusCode);
+                console.log("Myjson POST request returned an error: " + error + ", response code: " + response.statusCode + ", will retry");
+                // Push this array again to retry
+                uploadQueue.push([episodesArray]);
             }
             // Call the callback
             callback();
@@ -162,7 +167,7 @@ function uploadJSON(episodesArray, callback) {
 
 // Get all shows
 eztv.getShows(null, function(error, results) {
-    console.log("callback for getShows received, error? " + error + ", # results: " + results.length);
+    console.log("callback for getShows received, error? " + error + ", # results: " + ((results) ? results.length : '0'));
     // Check there's no error and we have some results (should check both existance and number of objects)
     if (!error && results.length) {
         // Create our queue which will hold the tasks to process shows, allowing 50 simaltaneous tasks, really could go up to 256 as that is the ulimit for file descriptors, but lets not be greedy and try not to annoy TVDB
@@ -171,8 +176,6 @@ eztv.getShows(null, function(error, results) {
         // Set the callback for when the queue has been drained fully (all shows processed)
         queue.drain = function() {
             console.log("All shows processed, now uploading JSON chunks…");
-            // Create upload queue
-            var uploadQueue = async.queue(uploadJSON, 5);
             // Split the array into 15
             var jsonChunks = episodesJSON.chunk(Math.ceil(episodesJSON.length / 15));
             console.log("Chunk count: " + jsonChunks.length);
