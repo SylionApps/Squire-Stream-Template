@@ -81,7 +81,7 @@ if (argv.m) {
                         '&tr=udp://tracker.coppersurfer.tk:6969' +
                         '&tr=udp://exodus.desync.com:6969' +
                         '&tr=http://exodus.desync.com:6969/announce',
-                    quality: oneMovie.torrents[0].quality,
+                    // quality: oneMovie.torrents[0].quality,
                     seeders: oneMovie.torrents[0].seeds,
                     size: oneMovie.torrents[0].size_bytes
                 };
