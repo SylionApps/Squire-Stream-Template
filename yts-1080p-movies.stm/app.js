@@ -61,7 +61,7 @@ if (argv.m) {
     ).then(function(values) {
         return Promise.resolve(
             Array.prototype.concat.apply([], values).filter(function(oneMovie) {
-                return oneMovie.hasOwnProperty('torrents');
+                return oneMovie && oneMovie.hasOwnProperty('torrents');
             }).map(function(oneMovie) {
                 oneMovie.torrents = oneMovie.torrents.filter(
                     function(oneTorrent) {
