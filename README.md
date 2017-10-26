@@ -1,3 +1,6 @@
+# Outdated
+Please note .stm files are not supported by Squire Helper anymore!
+
 # Squire Streams for Squire app
 
 <img src="https://s3.amazonaws.com/Squire_Contents/sites+resources/github+streamers/stream_icon.png" width="108" height="108" alt="Squire Stream Icon"/>
@@ -32,7 +35,3 @@
 2. Unzip it and double click on the .stm file.
 The stream will be added automatically to Squire Helper.
 After a few seconds, the stream’s content will be available in “Shows” section of Squire app.
-
-## Support
-If you are experiencing problems please open a new Issue, so I can take a look.
-
